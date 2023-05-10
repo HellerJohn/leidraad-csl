@@ -1,4 +1,4 @@
-# leidraad-csl
+# Leidraad voor Juridissche Auteurs CSL (2022)
 CSL for the 2022 version of the "Leidraad for voor juridische auteurs".
 
 
