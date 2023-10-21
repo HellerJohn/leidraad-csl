@@ -2,8 +2,8 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" default-locale="nl-NL">
   <!-- This style was edited with the Visual CSL Editor (https://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>Leidraad voor juridische auteurs 2019 (Subsequent Citation Styles)</title>
-    <title-short>Leidraad 2019 (Subsequent Citation Styles)</title-short>
+    <title>Leidraad voor Juridische Auteurs 2022 (Footnote References)</title>
+    <title-short>Leidraad 2022 (Footnote References)</title-short>
     <id>http://www.zotero.org/styles/leidraad-voor-juridische-auteurs</id>
     <link href="http://www.zotero.org/styles/leidraad-voor-juridische-auteurs" rel="self"/>
     <link href="https://www.wolterskluwer.nl/auteur/voor-auteurs/auteursmiddelen-en-instructies" rel="documentation"/>
@@ -34,26 +34,14 @@
   </locale>
   <macro name="creator-long">
     <choose>
-      <if variable="editor">
-        <names variable="author" suffix="/">
-          <name form="long" initialize="true" initialize-with="." and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
-            <name-part name="family"/>
-          </name>
-        </names>
-        <names variable="editor">
-          <name form="long" initialize="true" initialize-with="." and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
-            <name-part name="family"/>
-          </name>
-        </names>
-      </if>
-      <else-if variable="editorial-director">
+      <if variable="editorial-director" suffix="/">
         <names variable="editorial-director">
           <name form="long" initialize="true" initialize-with="." and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
             <name-part name="family"/>
           </name>
           <label form="short" prefix=" (" suffix=")"/>
         </names>
-      </else-if>
+      </if>
       <else-if variable="author">
         <names variable="author">
           <name form="long" initialize="true" initialize-with="." and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
@@ -65,25 +53,13 @@
   </macro>
   <macro name="creator-short">
     <choose>
-      <if variable="editor">
-        <names variable="author" suffix="/">
-          <name form="short" and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
-            <name-part name="family" text-case="capitalize-all"/>
-          </name>
-        </names>
-        <names variable="editor">
+      <if variable="editorial-director">
+        <names variable="editorial-director" suffix="/">
           <name form="short" and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
             <name-part name="family" text-case="capitalize-all"/>
           </name>
         </names>
       </if>
-      <else-if variable="editorial-director">
-        <names variable="editorial-director">
-          <name form="short" and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
-            <name-part name="family" text-case="capitalize-all"/>
-          </name>
-        </names>
-      </else-if>
       <else-if variable="author">
         <names variable="author">
           <name form="short" and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
@@ -93,8 +69,8 @@
       </else-if>
     </choose>
   </macro>
-  <macro name="container-author">
-    <names variable="container-author">
+  <macro name="container-editor">
+    <names variable="editor" suffix=" (red.)">
       <name form="long" initialize="true" initialize-with="." and="symbol" delimiter=", " delimiter-precedes-et-al="never" delimiter-precedes-last="never">
         <name-part name="family" text-case="capitalize-first"/>
       </name>
@@ -160,7 +136,10 @@
       </if>
     </choose>
   </macro>
-  <macro name="reference-book-etc-short">
+
+  <!-- Builder for Short references for secondary literature (books, journals, etc.) -->
+  <!-- Reference: "De verkorte verwijzing in de voetnoten bestaat uit de achternaam van de auteur en het jaar, gevolgd door een paragraaf- of paginanummer." -->
+  <macro name="reference-secondary-short">
     <group>
       <choose>
         <if variable="author editor editorial-director" match="any">
@@ -177,26 +156,12 @@
           </choose>
         </else>
       </choose>
-      <choose>
-        <if type="article-magazine article-newspaper" match="any">
-          <group delimiter=" " prefix=", ">
-            <text variable="container-title" font-style="italic"/>
-            <date form="text" variable="issued"/>
-          </group>
-        </if>
-        <else-if match="all" type="article-journal">
-          <group delimiter=" ">
-            <text variable="container-title" font-style="italic" prefix=", "/>
-            <text macro="number-journal-short" prefix=" "/>
-          </group>
-        </else-if>
-        <else>
-          <text macro="year-publication" prefix=" "/>
-        </else>
-      </choose>
+      <text macro="year-publication" prefix=" "/>
     </group>
   </macro>
-  <macro name="reference-book-etc-long">
+
+  <!-- Builder for Long Reference for Secondary Sources (books, journals, etc.) -->
+  <macro name="reference-secondary-long">
     <text macro="creator-long" suffix=", "/>
     <choose>
       <if type="book report thesis" match="any">
@@ -236,7 +201,7 @@
       </else-if>
       <else-if type="chapter">
         <text variable="title" quotes="true" suffix=", in: "/>
-        <text macro="container-author" suffix=", "/>
+        <text macro="container-editor" suffix=", "/>
         <group suffix=", ">
           <text variable="container-title" font-style="italic"/>
           <group delimiter=" " prefix=" (" suffix=")">
@@ -313,7 +278,7 @@
               <text variable="locator" prefix=", p. "/>
             </if>
           </choose>
-          <text variable="note" prefix=" (" suffix=")"/>
+          <text variable="title" prefix=" (" suffix=")"/>
         </group>
       </if>
       <else-if type="legislation">
@@ -418,7 +383,7 @@
       <if type="article article-magazine article-newspaper article-journal book chapter paper-conference report review review-book thesis" match="any">
         <choose>
           <if position="subsequent">
-            <text macro="reference-book-etc-short"/>
+            <text macro="reference-secondary-short"/>
             <choose>
               <if locator="page chapter sub-verbo column book figure folio line note opus part verse issue volume" match="any">
                 <label plural="never" prefix=", " suffix=" " variable="locator" form="short"/>
@@ -434,7 +399,7 @@
             </choose>
           </if>
           <else>
-              <text macro="reference-book-etc-long"/>
+              <text macro="reference-secondary-long"/>
               <choose>
                 <if locator="page chapter sub-verbo column book figure folio line note opus part verse issue volume" match="any">
                   <label plural="never" prefix=", " suffix=" " variable="locator" form="short"/>
@@ -465,7 +430,7 @@
   <macro name="bibliography-reference-title">
     <choose>
       <if type="article article-magazine article-newspaper article-journal book chapter paper-conference report review review-book thesis" match="any">
-        <text macro="reference-book-etc-short"/>
+        <text macro="reference-secondary-short"/>
       </if>
       <else-if type="bill legislation" match="any">
         <text macro="reference-legislative-short"/>
@@ -482,7 +447,7 @@
   <macro name="bibliography-reference-long">
     <choose>
       <if type="article article-magazine article-newspaper article-journal book chapter paper-conference report review review-book thesis" match="any">
-        <text macro="reference-book-etc-long"/>
+        <text macro="reference-secondary-long"/>
       </if>
       <else-if type="bill legislation" match="any">
         <text macro="reference-legislative-long"/>
@@ -576,7 +541,6 @@
   <macro name="title-and-collection">
     <group suffix=", ">
       <text variable="title" font-style="italic"/>
-      
     </group>
   </macro>
   <macro name="number-journal-short">
