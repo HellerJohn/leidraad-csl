@@ -10,7 +10,7 @@
     <link href="https://www.wolterskluwer.com/-/media/project/wolterskluwer/oneweb/www/lr/nl-media/auteurs%20voor-auteurs/pdf26920190802161350.pdf" rel="documentation"/>
     <category citation-format="note"/>
     <category field="law"/>
-    <updated>2023-05-09T05:06:20+00:00</updated>
+    <updated>2023-11-02T05:06:20+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="nl-NL">
@@ -142,9 +142,12 @@
   <macro name="reference-secondary-short">
     <group>
       <choose>
-        <if variable="author editor editorial-director" match="any">
-          <text macro="creator-short"/>
+        <if variable="title" form="short" match="any">
+          <text variable="title" form="short" font-style="italic"/>
         </if>
+        <else-if variable="author editor editorial-director" match="any">
+          <text macro="creator-short"/>
+        </else-if>
         <else>
           <choose>
             <if type="thesis book report" match="any">
@@ -338,29 +341,15 @@
           <text variable="number" prefix=", "/>
           <text variable="container-title" font-style="italic" prefix=", " suffix=" "/>
           <text variable="volume"/>
-          <text variable="page" prefix=", "/>
+          <text variable="page" prefix="/"/>
         </if>
         <else-if variable="number">
           <text variable="number" prefix=", "/>
-          <choose>
-            <if locator="paragraph">
-              <text variable="locator" prefix=" "/>
-            </if>
-          </choose>
-        </else-if>
-        <else-if variable="volume container-title" match="all">
-          <text variable="container-title" prefix=", " suffix=" "/>
-          <text variable="volume"/>
-          <choose>
-            <if locator="paragraph">
-              <text variable="locator" prefix=" "/>
-            </if>
-          </choose>
         </else-if>
       </choose>
       <text variable="title" prefix=" (" suffix=")" font-style="italic"/>
       <choose>
-        <if match="any" locator="page">
+        <if locator="page" match="any">
           <text variable="locator" prefix=", p. "/>
         </if>
         <else>
