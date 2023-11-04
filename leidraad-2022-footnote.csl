@@ -10,7 +10,7 @@
     <link href="https://www.wolterskluwer.com/-/media/project/wolterskluwer/oneweb/www/lr/nl-media/auteurs%20voor-auteurs/pdf26920190802161350.pdf" rel="documentation"/>
     <category citation-format="note"/>
     <category field="law"/>
-    <updated>2023-11-02T05:06:20+00:00</updated>
+    <updated>2023-11-04T05:06:20+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="nl-NL">
@@ -142,7 +142,7 @@
   <macro name="reference-secondary-short">
     <group>
       <choose>
-        <if variable="title" form="short" match="any">
+        <if variable="title-short" match="any">
           <text variable="title" form="short" font-style="italic"/>
         </if>
         <else-if variable="author editor editorial-director" match="any">
