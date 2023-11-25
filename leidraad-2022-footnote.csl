@@ -342,6 +342,7 @@
           <text variable="container-title" font-style="italic" prefix=", " suffix=" "/>
           <text variable="volume"/>
           <text variable="page" prefix="/"/>
+          <text macro="creator-long" prefix=", m.nt. "/>
         </if>
         <else-if variable="number">
           <text variable="number" prefix=", "/>
