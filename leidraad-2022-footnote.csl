@@ -290,6 +290,11 @@
             <text variable="locator" prefix="art. " suffix=" "/>
             <text variable="title" form="short"/>
           </if>
+          <else-if locator="rule">
+            <text variable="title" form="short"/>
+            <text variable="locator" prefix=" "/>
+
+          </else-if>
           <else>
             <text variable="container-title" suffix=" " font-style="italic"/>
             <text macro="legislation-issued-short"/>
